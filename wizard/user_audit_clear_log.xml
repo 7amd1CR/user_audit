@@ -1,0 +1,29 @@
+<odoo>
+    <record model="ir.ui.view" id="user_audit_clear_log_form">
+        <field name="name">clear log form</field>
+        <field name="model">user.audit.clear.log</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="all_log"/>
+                        <field name="to_date"/>
+                    </group>
+                    <group>
+                        <field name="type" widget="radio"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Delete Log" class="btn-primary" data-hotkey="v" type="object" name="clear_log"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="user_audit_clear_log_wizard_action" model="ir.actions.act_window">
+        <field name="name">Clear Log</field>
+        <field name="res_model">user.audit.clear.log</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

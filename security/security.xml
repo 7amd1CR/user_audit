@@ -1,0 +1,5 @@
+<odoo>
+    <record id="mail_activity_group" model="res.groups">
+        <field name="name">mail activity group</field>
+    </record>
+</odoo>

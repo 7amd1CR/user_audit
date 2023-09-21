@@ -1,0 +1,7 @@
+<odoo>
+    <menuitem
+            id="user_audit_root_menu"
+            name="User Audit"
+            parent="crm.crm_menu_report"
+            action="user_audit_log_action"/>
+</odoo>

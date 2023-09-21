@@ -1,0 +1,74 @@
+<odoo>
+    <record id="user_audit_log_search_view" model="ir.ui.view">
+        <field name="name">user.audit.log.view.search</field>
+        <field name="model">user.audit.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="user_id"/>
+                <field name="record"/>
+                <field name="type"/>
+                <field name="date"/>
+                <filter string="Create" name="create" domain="[('type', '=', 'create')]"/>
+                <filter string="Read" name="read" domain="[('type', '=', 'read')]"/>
+                <filter string="Write" name="write" domain="[('type', '=', 'write')]"/>
+                <filter string="Delete" name="delete" domain="[('type', '=', 'delete')]"/>
+                <filter string="Copy" name="copy" domain="[('type', '=', 'copy')]"/>
+                <filter string="Date" name="date" date="date"/>
+                <group string="Group By" expand="0">
+                    <filter name="type" string="Type" context="{'group_by':'type'}"/>
+                    <filter name="date" string="Date" context="{'group_by':'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="user_audit_log_tree_view" model="ir.ui.view">
+        <field name="name">user.audit.log.view.tree</field>
+        <field name="model">user.audit.log</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="user_id"/>
+                <field name="record"/>
+                <field name="object" optional="hide"/>
+                <field name="type"/>
+                <field name="date"/>
+                <field name="update_field" string="Field"/>
+                <field name="old_value" string='Old Value'/>
+                <field name="updated_value" string='New Value'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="user_audit_log_form_view" model="ir.ui.view">
+        <field name="name">user.audit.log.view.form</field>
+        <field name="model">user.audit.log</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="object"/>
+                            <field name="record"/>
+                            <!--                            <field name="reference"/>-->
+                        </group>
+                        <group>
+                            <field name="type"/>
+                            <field name="user_id"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('type', '!=', 'write')]}">
+                        <field name="update_field"/>
+                        <field name="updated_value"/>
+                        <field name="old_value"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="user_audit_log_action" model="ir.actions.act_window">
+        <field name="name">User Audit log</field>
+        <field name="res_model">user.audit.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
